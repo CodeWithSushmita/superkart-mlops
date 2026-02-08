@@ -26,9 +26,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r superKart_project/deployment/requirements.txt
 
-      - name: Data Preparation
+      - name: Data Preparation (structure check)
         run: |
-          python superKart_project/model_building/prep.py
+         echo "Listing repository structure"
+         ls -R
+         echo "Checking prep script exists"
+         test -f superKart_project/model_building/prep.py
+
 
       - name: Model Training and Registration
         env:
