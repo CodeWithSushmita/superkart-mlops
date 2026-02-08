@@ -1,0 +1,37 @@
+name: SuperKart MLOps Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  train-and-register:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.9"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r superKart_project/deployment/requirements.txt
+
+      - name: Data Preparation
+        run: |
+          python superKart_project/model_building/prep.py
+
+      - name: Model Training and Registration
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          python superKart_project/model_building/train_and_register.py
