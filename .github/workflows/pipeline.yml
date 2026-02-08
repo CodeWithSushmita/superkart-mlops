@@ -36,8 +36,7 @@ jobs:
 
 
 
-      - name: Model Training and Registration
-        env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      - name: Model Training and Registration (Skipped)
         run: |
-          python superKart_project/model_building/train_and_register.py
+          echo "Model already trained and registered. Skipping training step."
+
