@@ -26,12 +26,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r superKart_project/deployment/requirements.txt
 
-      - name: Data Preparation (structure check)
+      - name: Project Structure Validation
         run: |
-         echo "Listing repository structure"
-         ls -R
-         echo "Checking prep script exists"
-         test -f superKart_project/model_building/prep.py
+          echo "Listing repository structure"
+          ls -R
+          echo "Checking deployment artifacts"
+          test -f superKart_project/deployment/app.py
+          test -f superKart_project/deployment/requirements.txt
+
 
 
       - name: Model Training and Registration
